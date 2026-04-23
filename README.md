@@ -82,7 +82,7 @@
 <body>
 
 <header>
-  <h1>🎮 Mis Minijuegos en Godot</h1>
+  <h1> Mis Minijuegos en Godot</h1>
   <p>FlappyBird · SpaceInvader · Jetpack · CoinDash</p>
 </header>
 
