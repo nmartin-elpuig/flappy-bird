@@ -90,7 +90,7 @@
 
   <!-- FlappyBird -->
   <div class="card">
-    <img src="imagenes/flappybird.jpg">
+    <img src="https://programamos.es/web/wp-content/uploads/2016/10/flappybird.jpg">
     <div class="content">
       <h2>FlappyBird</h2>
       <p>Evita obstáculos volando y consigue la mayor puntuación posible.</p>
