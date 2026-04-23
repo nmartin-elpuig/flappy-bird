@@ -117,7 +117,7 @@
       <h2>Jetpack</h2>
       <p>Vuela con tu jetpack evitando trampas y recogiendo puntos.</p>
       <a class="btn download" href="descargas/jetpack.zip">⬇️ Descargar</a>
-      <a class="btn github" href="https://github.com/tuusuario/jetpack">💻 GitHub</a>
+      <a class="btn github" href="https://github.com/nmartin-elpuig/Jetpack/tree/main">💻 GitHub</a>
     </div>
   </div>
 
