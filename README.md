@@ -94,7 +94,7 @@
     <div class="content">
       <h2>FlappyBird</h2>
       <p>Evita obstáculos volando y consigue la mayor puntuación posible.</p>
-      <a class="btn download" href="descargas/flappybird.zip">⬇️ Descargar</a>
+      <a class="btn download" href="https://codeload.github.com/nmartin-elpuig/Jetpack/zip/refs/heads/main?token=BYMYJUJBDYB7H2ZYXYQLGZLJ5IAME">⬇️ Descargar</a>
       <a class="btn github" href="https://github.com/nmartin-elpuig/proyecto">💻 GitHub</a>
     </div>
   </div>
