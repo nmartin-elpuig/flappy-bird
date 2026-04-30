@@ -10,7 +10,7 @@
 <style>
 :root{
   --bg:#0b1220;
-  --card:rgba(30,41,59,0.6);
+  --card:#1e293b;
   --text:#e2e8f0;
   --accent:#38bdf8;
   --green:#22c55e;
@@ -23,47 +23,31 @@ body{
   color:var(--text);
 }
 
-/* NAV */
-nav{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 20px;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.5);
-  z-index:1000;
-}
-
-nav h2{color:var(--accent);margin:0}
-
-nav input{
-  padding:8px;
-  border-radius:10px;
-  border:none;
-  outline:none;
-  width:220px;
-}
-
-/* HEADER COMPACTO */
+/* HEADER */
 header{
   text-align:center;
-  padding:20px 10px 10px;
+  padding:20px;
 }
 
-header h1{
-  margin:5px;
-  font-size:1.8rem;
-  color:var(--accent);
+h1{color:var(--accent);margin:0}
+
+/* RANKING PANEL */
+.ranking{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px;
 }
 
-header p{
-  margin:0;
-  opacity:.7;
+.rank-box{
+  background:rgba(255,255,255,0.05);
+  padding:8px 12px;
+  border-radius:10px;
+  font-size:.85rem;
 }
 
-/* JUEGOS ARRIBA (FOCO PRINCIPAL) */
+/* GRID */
 .container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -83,7 +67,7 @@ header p{
 }
 
 .card:hover{
-  transform:translateY(-8px) scale(1.02);
+  transform:translateY(-8px);
 }
 
 .card img{
@@ -92,20 +76,9 @@ header p{
   object-fit:cover;
 }
 
-.content{
-  padding:15px;
-}
+.content{padding:15px}
 
 h2{color:var(--green);margin:0}
-
-.tag{
-  display:inline-block;
-  font-size:.7rem;
-  background:var(--accent);
-  padding:3px 8px;
-  border-radius:8px;
-  margin-bottom:5px;
-}
 
 .btn{
   display:inline-block;
@@ -126,138 +99,137 @@ h2{color:var(--green);margin:0}
   margin-top:5px;
 }
 
-/* TOP BUTTON */
-#topBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--accent);
-  border:none;
-  padding:10px;
-  border-radius:50%;
-  display:none;
-  cursor:pointer;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.6;
-}
 </style>
 </head>
 
 <body>
 
-<nav>
-<h2>🎮 H&N Games</h2>
-<input id="search" placeholder="Buscar juegos...">
-</nav>
-
 <header>
-<h1>🔥 Juega ahora</h1>
-<p>Todos los minijuegos directamente disponibles</p>
+<h1>🎮 H&N Games Hub</h1>
+
+<div class="ranking">
+<div class="rank-box">🏆 #1 <span id="top1">-</span></div>
+<div class="rank-box">👀 Total visitas: <span id="totalV">0</span></div>
+</div>
 </header>
 
-<!-- 🔥 JUEGOS PRIMERO (IMPORTANTE) -->
 <div class="container">
 
 <!-- FLAPPY -->
-<div class="card" data-name="flappy arcade">
+<div class="card" data-id="flappy">
 <img src="https://programamos.es/web/wp-content/uploads/2016/10/flappybird.jpg">
 <div class="content">
-<span class="tag">ARCADE</span>
 <h2>FlappyBird</h2>
 
-<a class="btn download" href="https://github.com/nmartin-elpuig/FlappyBird/releases/download/v1.0/FlappyBird-main.zip" onclick="add('flappy')">Descargar</a>
+<a class="btn download" href="https://github.com/nmartin-elpuig/FlappyBird/releases/download/v1.0/FlappyBird-main.zip" onclick="downloadGame('flappy')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/proyecto">GitHub</a>
 
 <div class="meta">
-📥 <span id="flappy">0</span> descargas
+👀 Visitas: <span id="flappyV">0</span> · 📥 <span id="flappyD">0</span>
 </div>
 </div>
 </div>
 
 <!-- SPACE -->
-<div class="card" data-name="space shooter">
+<div class="card" data-id="space">
 <img src="https://repository-images.githubusercontent.com/951086522/26f54ffb-8f82-4dab-8daa-ce5f9ccbf1f2">
 <div class="content">
-<span class="tag">SPACE</span>
 <h2>SpaceInvader</h2>
 
-<a class="btn download" href="https://github.com/nmartin-elpuig/SpaceInvader/releases/download/V1.0/SpaceInvader-main.zip" onclick="add('space')">Descargar</a>
+<a class="btn download" href="https://github.com/nmartin-elpuig/SpaceInvader/releases/download/V1.0/SpaceInvader-main.zip" onclick="downloadGame('space')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/SpaceInvader">GitHub</a>
 
 <div class="meta">
-📥 <span id="space">0</span> descargas
+👀 Visitas: <span id="spaceV">0</span> · 📥 <span id="spaceD">0</span>
 </div>
 </div>
 </div>
 
 <!-- JETPACK -->
-<div class="card" data-name="jetpack arcade">
+<div class="card" data-id="jetpack">
 <img src="https://play-lh.googleusercontent.com/ombetvA16LmQb1_meog0znsCk4pKcpXA2iRyZLwP8FboxiVvWvufVmqSyLYz1YK4F1PyqZO9Q6AyrGP-kaFr=w526-h296-rw">
 <div class="content">
-<span class="tag">ARCADE</span>
 <h2>Jetpack</h2>
 
-<a class="btn download" href="https://github.com/nmartin-elpuig/Jetpack/releases/download/untagged-a71b8cefc69f74260e94/Jetpack-main.zip" onclick="add('jetpack')">Descargar</a>
+<a class="btn download" href="https://github.com/nmartin-elpuig/Jetpack/releases/download/untagged-a71b8cefc69f74260e94/Jetpack-main.zip" onclick="downloadGame('jetpack')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/Jetpack">GitHub</a>
 
 <div class="meta">
-📥 <span id="jetpack">0</span> descargas
+👀 Visitas: <span id="jetpackV">0</span> · 📥 <span id="jetpackD">0</span>
 </div>
 </div>
 </div>
 
 <!-- COINDASH -->
-<div class="card" data-name="coindash arcade">
+<div class="card" data-id="coindash">
 <img src="imagenes/coindash.jpg">
 <div class="content">
-<span class="tag">ARCADE</span>
 <h2>CoinDash</h2>
 
-<a class="btn download" href="descargas/coindash.zip" onclick="add('coindash')">Descargar</a>
+<a class="btn download" href="descargas/coindash.zip" onclick="downloadGame('coindash')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/Coindash_H-N">GitHub</a>
 
 <div class="meta">
-📥 <span id="coindash">0</span> descargas
+👀 Visitas: <span id="coindashV">0</span> · 📥 <span id="coindashD">0</span>
 </div>
 </div>
 </div>
 
 </div>
-
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 
 <script>
 
-// downloads
-function add(id){
-let c=localStorage.getItem(id)||0;
-c++;
-localStorage.setItem(id,c);
-document.getElementById(id).innerText=c;
+let games=["flappy","space","jetpack","coindash"];
+
+// VISITAS
+function addVisit(id){
+let v=localStorage.getItem(id+"_v")||0;
+v++;
+localStorage.setItem(id+"_v",v);
 }
 
-// load
-["flappy","space","jetpack","coindash"].forEach(i=>{
-document.getElementById(i).innerText=localStorage.getItem(i)||0;
+// DESCARGAS
+function downloadGame(id){
+let d=localStorage.getItem(id+"_d")||0;
+d++;
+localStorage.setItem(id+"_d",d);
+}
+
+// LOAD UI + VISITS
+function update(){
+
+let total=0;
+let ranking=[];
+
+games.forEach(g=>{
+let v=Number(localStorage.getItem(g+"_v")||0);
+let d=Number(localStorage.getItem(g+"_d")||0);
+
+document.getElementById(g+"V").innerText=v;
+document.getElementById(g+"D").innerText=d;
+
+total+=v;
+
+// ranking array
+ranking.push({name:g,visits:v});
 });
 
-// search
-document.getElementById("search").addEventListener("input",e=>{
-let v=e.target.value.toLowerCase();
-document.querySelectorAll(".card").forEach(c=>{
-c.style.display=c.dataset.name.includes(v)?"block":"none";
-});
+// total visits
+document.getElementById("totalV").innerText=total;
+
+// sort ranking
+ranking.sort((a,b)=>b.visits-a.visits);
+
+// top 1
+document.getElementById("top1").innerText=ranking[0].name;
+}
+
+// INIT
+games.forEach(g=>{
+addVisit(g);
 });
 
-// top button
-let btn=document.getElementById("topBtn");
-window.onscroll=()=>btn.style.display=scrollY>300?"block":"none";
+update();
 
 </script>
 
