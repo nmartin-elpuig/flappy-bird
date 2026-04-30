@@ -16,7 +16,6 @@
   --green:#22c55e;
 }
 
-/* LIGHT MODE */
 .light{
   --bg:#f1f5f9;
   --card:#ffffff;
@@ -70,6 +69,11 @@ nav button{
   border-radius:16px;
   overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.3);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
 }
 
 .card img{
@@ -82,49 +86,39 @@ nav button{
 
 h2{color:var(--green);margin:0}
 
+/* STATS */
 .meta{
   font-size:.8rem;
   opacity:.8;
+  margin-top:5px;
 }
 
-/* COMMENTS */
-.comments{
-  margin-top:10px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:10px;
-}
-
-.comments input{
-  width:70%;
-  padding:6px;
-  border-radius:6px;
+/* LIKE BUTTON */
+.like-btn{
+  background:none;
   border:none;
-  outline:none;
-}
-
-.comments button{
-  padding:6px;
-  border:none;
-  border-radius:6px;
-  background:var(--accent);
-  color:white;
+  font-size:1.2rem;
   cursor:pointer;
-}
-
-.comment-list{
+  color:var(--accent);
   margin-top:8px;
-  font-size:.8rem;
-  max-height:80px;
-  overflow:auto;
 }
 
-.comment{
-  background:rgba(255,255,255,0.05);
-  padding:5px;
-  border-radius:6px;
-  margin-bottom:5px;
+/* RANK */
+.rank{
+  font-size:.75rem;
+  opacity:.7;
 }
 
+/* HEADER */
+header{
+  text-align:center;
+  padding:15px;
+}
+
+header h1{
+  color:var(--accent);
+  margin:5px;
+}
 </style>
 </head>
 
@@ -134,6 +128,11 @@ h2{color:var(--green);margin:0}
 <h2>🎮 H&N Games</h2>
 <button onclick="toggleTheme()">🌙 / ☀️</button>
 </nav>
+
+<header>
+<h1>🔥 Juegos disponibles</h1>
+<p>Likea tus favoritos y compite en el ranking</p>
+</header>
 
 <div class="container">
 
@@ -145,15 +144,11 @@ h2{color:var(--green);margin:0}
 <h2>FlappyBird</h2>
 
 <div class="meta">
-👀 <span id="flappyV">0</span> · 📥 <span id="flappyD">0</span>
+👀 <span id="flappyV">0</span> · 👍 <span id="flappyL">0</span>
 </div>
 
-<!-- COMMENTS -->
-<div class="comments">
-<input id="flappyInput" placeholder="Escribe comentario...">
-<button onclick="addComment('flappy')">+</button>
-<div id="flappyC" class="comment-list"></div>
-</div>
+<button class="like-btn" onclick="like('flappy')">👍 Like</button>
+<div class="rank" id="flappyR"></div>
 
 </div>
 </div>
@@ -166,14 +161,45 @@ h2{color:var(--green);margin:0}
 <h2>SpaceInvader</h2>
 
 <div class="meta">
-👀 <span id="spaceV">0</span> · 📥 <span id="spaceD">0</span>
+👀 <span id="spaceV">0</span> · 👍 <span id="spaceL">0</span>
 </div>
 
-<div class="comments">
-<input id="spaceInput" placeholder="Escribe comentario...">
-<button onclick="addComment('space')">+</button>
-<div id="spaceC" class="comment-list"></div>
+<button class="like-btn" onclick="like('space')">👍 Like</button>
+<div class="rank" id="spaceR"></div>
+
 </div>
+</div>
+
+<!-- JETPACK -->
+<div class="card" data-id="jetpack">
+<img src="https://play-lh.googleusercontent.com/ombetvA16LmQb1_meog0znsCk4pKcpXA2iRyZLwP8FboxiVvWvufVmqSyLYz1YK4F1PyqZO9Q6AyrGP-kaFr=w526-h296-rw">
+
+<div class="content">
+<h2>Jetpack</h2>
+
+<div class="meta">
+👀 <span id="jetpackV">0</span> · 👍 <span id="jetpackL">0</span>
+</div>
+
+<button class="like-btn" onclick="like('jetpack')">👍 Like</button>
+<div class="rank" id="jetpackR"></div>
+
+</div>
+</div>
+
+<!-- COINDASH -->
+<div class="card" data-id="coindash">
+<img src="imagenes/coindash.jpg">
+
+<div class="content">
+<h2>CoinDash</h2>
+
+<div class="meta">
+👀 <span id="coindashV">0</span> · 👍 <span id="coindashL">0</span>
+</div>
+
+<button class="like-btn" onclick="like('coindash')">👍 Like</button>
+<div class="rank" id="coindashR"></div>
 
 </div>
 </div>
@@ -182,65 +208,59 @@ h2{color:var(--green);margin:0}
 
 <script>
 
-let games=["flappy","space"];
+let games=["flappy","space","jetpack","coindash"];
+
+/* VISITAS */
+function addVisit(g){
+let v=Number(localStorage.getItem(g+"_v")||0);
+v++;
+localStorage.setItem(g+"_v",v);
+}
+
+/* LIKES */
+function like(g){
+let l=Number(localStorage.getItem(g+"_l")||0);
+l++;
+localStorage.setItem(g+"_l",l);
+update();
+}
+
+/* UPDATE UI + RANKING */
+function update(){
+
+let ranking=[];
+
+games.forEach(g=>{
+let v=Number(localStorage.getItem(g+"_v")||0);
+let l=Number(localStorage.getItem(g+"_l")||0);
+
+document.getElementById(g+"V").innerText=v;
+document.getElementById(g+"L").innerText=l;
+
+// score = likes + visitas
+let score=v + l*2;
+
+ranking.push({g,score});
+});
+
+// ordenar ranking
+ranking.sort((a,b)=>b.score-a.score);
+
+// mostrar ranking
+ranking.forEach((r,i)=>{
+document.getElementById(r.g+"R").innerText = "🏆 Posición: #" + (i+1);
+});
+
+}
 
 /* THEME */
 function toggleTheme(){
 document.body.classList.toggle("light");
 }
 
-/* VISITS + LOAD */
-function init(){
-games.forEach(g=>{
-let v=localStorage.getItem(g+"_v")||0;
-v++;
-localStorage.setItem(g+"_v",v);
-
-let d=localStorage.getItem(g+"_d")||0;
-
-document.getElementById(g+"V").innerText=v;
-document.getElementById(g+"D").innerText=d;
-
-loadComments(g);
-});
-}
-
-/* DOWNLOAD (opcional futuro) */
-function download(id){
-let d=localStorage.getItem(id+"_d")||0;
-d++;
-localStorage.setItem(id+"_d",d);
-}
-
-/* COMMENTS */
-function addComment(game){
-let input=document.getElementById(game+"Input");
-let text=input.value.trim();
-if(!text)return;
-
-let comments=JSON.parse(localStorage.getItem(game+"_c")||"[]");
-comments.push(text);
-localStorage.setItem(game+"_c",JSON.stringify(comments));
-
-input.value="";
-loadComments(game);
-}
-
-function loadComments(game){
-let box=document.getElementById(game+"C");
-let comments=JSON.parse(localStorage.getItem(game+"_c")||"[]");
-
-box.innerHTML="";
-
-comments.forEach(c=>{
-let div=document.createElement("div");
-div.className="comment";
-div.innerText=c;
-box.appendChild(div);
-});
-}
-
-init();
+/* INIT */
+games.forEach(g=>addVisit(g));
+update();
 
 </script>
 
