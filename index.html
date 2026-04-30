@@ -16,51 +16,45 @@
   --green:#22c55e;
 }
 
-.light{
-  --bg:#f1f5f9;
-  --card:#ffffff;
-  --text:#0f172a;
-  --accent:#0284c7;
-  --green:#16a34a;
-}
-
 body{
   margin:0;
   font-family:Poppins,sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:.3s;
 }
 
-/* NAV */
-nav{
-  position:sticky;
-  top:0;
+/* HEADER */
+header{
+  text-align:center;
+  padding:20px;
+}
+
+h1{color:var(--accent);margin:0}
+
+/* RANKING PANEL */
+.ranking{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 20px;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,.4);
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px;
 }
 
-nav h2{color:var(--accent);margin:0}
-
-nav button{
+.rank-box{
+  background:rgba(255,255,255,0.05);
   padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:var(--accent);
-  color:white;
+  border-radius:10px;
+  font-size:.85rem;
 }
 
 /* GRID */
 .container{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:20px;
   padding:20px;
+  max-width:1200px;
+  margin:auto;
 }
 
 /* CARD */
@@ -68,17 +62,17 @@ nav button{
   background:var(--card);
   border-radius:16px;
   overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
   transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-8px);
 }
 
 .card img{
   width:100%;
-  height:160px;
+  height:170px;
   object-fit:cover;
 }
 
@@ -86,52 +80,37 @@ nav button{
 
 h2{color:var(--green);margin:0}
 
-/* STATS */
+.btn{
+  display:inline-block;
+  margin-top:8px;
+  padding:8px 10px;
+  border-radius:10px;
+  text-decoration:none;
+  color:white;
+  font-size:.85rem;
+}
+
+.download{background:linear-gradient(135deg,#2563eb,#3b82f6)}
+.github{background:linear-gradient(135deg,#0ea5e9,#06b6d4)}
+
 .meta{
-  font-size:.8rem;
+  font-size:.75rem;
   opacity:.8;
   margin-top:5px;
 }
 
-/* LIKE BUTTON */
-.like-btn{
-  background:none;
-  border:none;
-  font-size:1.2rem;
-  cursor:pointer;
-  color:var(--accent);
-  margin-top:8px;
-}
-
-/* RANK */
-.rank{
-  font-size:.75rem;
-  opacity:.7;
-}
-
-/* HEADER */
-header{
-  text-align:center;
-  padding:15px;
-}
-
-header h1{
-  color:var(--accent);
-  margin:5px;
-}
 </style>
 </head>
 
 <body>
 
-<nav>
-<h2>🎮 H&N Games</h2>
-<button onclick="toggleTheme()">🌙 / ☀️</button>
-</nav>
-
 <header>
-<h1>🔥 Juegos disponibles</h1>
-<p>Likea tus favoritos y compite en el ranking</p>
+<h1>🎮 H&N Games Hub</h1>
+
+<div class="ranking">
+<div class="rank-box">🏆 #1 <span id="top1">-</span></div>
+<div class="rank-box">👀 Total visitas: <span id="totalV">0</span></div>
+</div>
 </header>
 
 <div class="container">
@@ -139,68 +118,60 @@ header h1{
 <!-- FLAPPY -->
 <div class="card" data-id="flappy">
 <img src="https://programamos.es/web/wp-content/uploads/2016/10/flappybird.jpg">
-
 <div class="content">
 <h2>FlappyBird</h2>
 
+<a class="btn download" href="https://github.com/nmartin-elpuig/FlappyBird/releases/download/v1.0/FlappyBird-main.zip" onclick="downloadGame('flappy')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/proyecto">GitHub</a>
+
 <div class="meta">
-👀 <span id="flappyV">0</span> · 👍 <span id="flappyL">0</span>
+👀 Visitas: <span id="flappyV">0</span> · 📥 <span id="flappyD">0</span>
 </div>
-
-<button class="like-btn" onclick="like('flappy')">👍 Like</button>
-<div class="rank" id="flappyR"></div>
-
 </div>
 </div>
 
 <!-- SPACE -->
 <div class="card" data-id="space">
 <img src="https://repository-images.githubusercontent.com/951086522/26f54ffb-8f82-4dab-8daa-ce5f9ccbf1f2">
-
 <div class="content">
 <h2>SpaceInvader</h2>
 
+<a class="btn download" href="https://github.com/nmartin-elpuig/SpaceInvader/releases/download/V1.0/SpaceInvader-main.zip" onclick="downloadGame('space')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/SpaceInvader">GitHub</a>
+
 <div class="meta">
-👀 <span id="spaceV">0</span> · 👍 <span id="spaceL">0</span>
+👀 Visitas: <span id="spaceV">0</span> · 📥 <span id="spaceD">0</span>
 </div>
-
-<button class="like-btn" onclick="like('space')">👍 Like</button>
-<div class="rank" id="spaceR"></div>
-
 </div>
 </div>
 
 <!-- JETPACK -->
 <div class="card" data-id="jetpack">
 <img src="https://play-lh.googleusercontent.com/ombetvA16LmQb1_meog0znsCk4pKcpXA2iRyZLwP8FboxiVvWvufVmqSyLYz1YK4F1PyqZO9Q6AyrGP-kaFr=w526-h296-rw">
-
 <div class="content">
 <h2>Jetpack</h2>
 
+<a class="btn download" href="https://github.com/nmartin-elpuig/Jetpack/releases/download/untagged-a71b8cefc69f74260e94/Jetpack-main.zip" onclick="downloadGame('jetpack')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/Jetpack">GitHub</a>
+
 <div class="meta">
-👀 <span id="jetpackV">0</span> · 👍 <span id="jetpackL">0</span>
+👀 Visitas: <span id="jetpackV">0</span> · 📥 <span id="jetpackD">0</span>
 </div>
-
-<button class="like-btn" onclick="like('jetpack')">👍 Like</button>
-<div class="rank" id="jetpackR"></div>
-
 </div>
 </div>
 
 <!-- COINDASH -->
 <div class="card" data-id="coindash">
 <img src="imagenes/coindash.jpg">
-
 <div class="content">
 <h2>CoinDash</h2>
 
+<a class="btn download" href="descargas/coindash.zip" onclick="downloadGame('coindash')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/Coindash_H-N">GitHub</a>
+
 <div class="meta">
-👀 <span id="coindashV">0</span> · 👍 <span id="coindashL">0</span>
+👀 Visitas: <span id="coindashV">0</span> · 📥 <span id="coindashD">0</span>
 </div>
-
-<button class="like-btn" onclick="like('coindash')">👍 Like</button>
-<div class="rank" id="coindashR"></div>
-
 </div>
 </div>
 
@@ -210,56 +181,54 @@ header h1{
 
 let games=["flappy","space","jetpack","coindash"];
 
-/* VISITAS */
-function addVisit(g){
-let v=Number(localStorage.getItem(g+"_v")||0);
+// VISITAS
+function addVisit(id){
+let v=localStorage.getItem(id+"_v")||0;
 v++;
-localStorage.setItem(g+"_v",v);
+localStorage.setItem(id+"_v",v);
 }
 
-/* LIKES */
-function like(g){
-let l=Number(localStorage.getItem(g+"_l")||0);
-l++;
-localStorage.setItem(g+"_l",l);
-update();
+// DESCARGAS
+function downloadGame(id){
+let d=localStorage.getItem(id+"_d")||0;
+d++;
+localStorage.setItem(id+"_d",d);
 }
 
-/* UPDATE UI + RANKING */
+// LOAD UI + VISITS
 function update(){
 
+let total=0;
 let ranking=[];
 
 games.forEach(g=>{
 let v=Number(localStorage.getItem(g+"_v")||0);
-let l=Number(localStorage.getItem(g+"_l")||0);
+let d=Number(localStorage.getItem(g+"_d")||0);
 
 document.getElementById(g+"V").innerText=v;
-document.getElementById(g+"L").innerText=l;
+document.getElementById(g+"D").innerText=d;
 
-// score = likes + visitas
-let score=v + l*2;
+total+=v;
 
-ranking.push({g,score});
+// ranking array
+ranking.push({name:g,visits:v});
 });
 
-// ordenar ranking
-ranking.sort((a,b)=>b.score-a.score);
+// total visits
+document.getElementById("totalV").innerText=total;
 
-// mostrar ranking
-ranking.forEach((r,i)=>{
-document.getElementById(r.g+"R").innerText = "🏆 Posición: #" + (i+1);
+// sort ranking
+ranking.sort((a,b)=>b.visits-a.visits);
+
+// top 1
+document.getElementById("top1").innerText=ranking[0].name;
+}
+
+// INIT
+games.forEach(g=>{
+addVisit(g);
 });
 
-}
-
-/* THEME */
-function toggleTheme(){
-document.body.classList.toggle("light");
-}
-
-/* INIT */
-games.forEach(g=>addVisit(g));
 update();
 
 </script>
