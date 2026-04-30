@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>H&N Games - Ultimate Hub</title>
+<title>H&N Games Hub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -14,48 +14,25 @@
   --text:#e2e8f0;
   --accent:#38bdf8;
   --green:#22c55e;
-  --shadow:rgba(0,0,0,0.4);
 }
-
-.light{
-  --bg:#f1f5f9;
-  --card:rgba(255,255,255,0.7);
-  --text:#0f172a;
-  --accent:#0284c7;
-  --green:#16a34a;
-  --shadow:rgba(0,0,0,0.1);
-}
-
-*{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:Poppins,sans-serif;
   background:var(--bg);
   color:var(--text);
-  overflow-x:hidden;
-  transition:.3s;
-}
-
-/* BACKGROUND PARTICLES */
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
 }
 
 /* NAV */
 nav{
-  position:fixed;
+  position:sticky;
   top:0;
-  width:100%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px 20px;
-  backdrop-filter:blur(15px);
-  background:rgba(0,0,0,0.4);
+  padding:10px 20px;
+  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.5);
   z-index:1000;
 }
 
@@ -69,36 +46,24 @@ nav input{
   width:220px;
 }
 
-/* HERO */
+/* HEADER COMPACTO */
 header{
-  padding:120px 20px 30px;
   text-align:center;
+  padding:20px 10px 10px;
 }
 
 header h1{
-  font-size:2.5rem;
+  margin:5px;
+  font-size:1.8rem;
   color:var(--accent);
 }
 
-header p{opacity:.7}
-
-/* DASHBOARD */
-.dashboard{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  margin-bottom:20px;
+header p{
+  margin:0;
+  opacity:.7;
 }
 
-.stat{
-  background:var(--card);
-  padding:10px 15px;
-  border-radius:12px;
-  box-shadow:0 10px 30px var(--shadow);
-}
-
-/* GRID */
+/* JUEGOS ARRIBA (FOCO PRINCIPAL) */
 .container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -108,25 +73,17 @@ header p{opacity:.7}
   margin:auto;
 }
 
-/* CARD PRO */
+/* CARD */
 .card{
   background:var(--card);
-  border-radius:18px;
+  border-radius:16px;
   overflow:hidden;
-  transform:translateY(20px);
-  opacity:0;
-  transition:.4s;
-  box-shadow:0 10px 30px var(--shadow);
-  backdrop-filter:blur(10px);
-}
-
-.card.show{
-  opacity:1;
-  transform:translateY(0);
+  transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.03);
+  transform:translateY(-8px) scale(1.02);
 }
 
 .card img{
@@ -135,9 +92,11 @@ header p{opacity:.7}
   object-fit:cover;
 }
 
-.content{padding:15px}
+.content{
+  padding:15px;
+}
 
-h2{color:var(--green)}
+h2{color:var(--green);margin:0}
 
 .tag{
   display:inline-block;
@@ -148,7 +107,6 @@ h2{color:var(--green)}
   margin-bottom:5px;
 }
 
-/* BUTTONS */
 .btn{
   display:inline-block;
   margin-top:8px;
@@ -162,14 +120,13 @@ h2{color:var(--green)}
 .download{background:linear-gradient(135deg,#2563eb,#3b82f6)}
 .github{background:linear-gradient(135deg,#0ea5e9,#06b6d4)}
 
-/* STATS */
 .meta{
   font-size:.75rem;
   opacity:.8;
   margin-top:5px;
 }
 
-/* TOP */
+/* TOP BUTTON */
 #topBtn{
   position:fixed;
   bottom:20px;
@@ -179,38 +136,31 @@ h2{color:var(--green)}
   padding:10px;
   border-radius:50%;
   display:none;
+  cursor:pointer;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
   padding:20px;
-  opacity:.7;
+  opacity:.6;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
-
 <nav>
-<h2>🎮 H&N Ultimate</h2>
+<h2>🎮 H&N Games</h2>
 <input id="search" placeholder="Buscar juegos...">
-<button onclick="toggleTheme()">🌓</button>
 </nav>
 
 <header>
-<h1>Game Hub Pro</h1>
-<p>Tu launcher de minijuegos</p>
-
-<div class="dashboard">
-<div class="stat">🔥 Top: <span id="topGame">-</span></div>
-<div class="stat">📥 Total descargas: <span id="totalD">0</span></div>
-<div class="stat">⭐ Favoritos: <span id="totalF">0</span></div>
-</div>
+<h1>🔥 Juega ahora</h1>
+<p>Todos los minijuegos directamente disponibles</p>
 </header>
 
+<!-- 🔥 JUEGOS PRIMERO (IMPORTANTE) -->
 <div class="container">
 
 <!-- FLAPPY -->
@@ -220,11 +170,11 @@ footer{
 <span class="tag">ARCADE</span>
 <h2>FlappyBird</h2>
 
-<a class="btn download" href="https://github.com/nmartin-elpuig/FlappyBird/releases/download/v1.0/FlappyBird-main.zip" onclick="download('flappy')">Descargar</a>
+<a class="btn download" href="https://github.com/nmartin-elpuig/FlappyBird/releases/download/v1.0/FlappyBird-main.zip" onclick="add('flappy')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/proyecto">GitHub</a>
 
 <div class="meta">
-📥 <span id="flappy">0</span> · ⭐ <span id="flappyF">0</span>
+📥 <span id="flappy">0</span> descargas
 </div>
 </div>
 </div>
@@ -236,69 +186,68 @@ footer{
 <span class="tag">SPACE</span>
 <h2>SpaceInvader</h2>
 
-<a class="btn download" href="https://github.com/nmartin-elpuig/SpaceInvader/releases/download/V1.0/SpaceInvader-main.zip" onclick="download('space')">Descargar</a>
+<a class="btn download" href="https://github.com/nmartin-elpuig/SpaceInvader/releases/download/V1.0/SpaceInvader-main.zip" onclick="add('space')">Descargar</a>
 <a class="btn github" href="https://github.com/nmartin-elpuig/SpaceInvader">GitHub</a>
 
 <div class="meta">
-📥 <span id="space">0</span> · ⭐ <span id="spaceF">0</span>
+📥 <span id="space">0</span> descargas
+</div>
+</div>
+</div>
+
+<!-- JETPACK -->
+<div class="card" data-name="jetpack arcade">
+<img src="https://play-lh.googleusercontent.com/ombetvA16LmQb1_meog0znsCk4pKcpXA2iRyZLwP8FboxiVvWvufVmqSyLYz1YK4F1PyqZO9Q6AyrGP-kaFr=w526-h296-rw">
+<div class="content">
+<span class="tag">ARCADE</span>
+<h2>Jetpack</h2>
+
+<a class="btn download" href="https://github.com/nmartin-elpuig/Jetpack/releases/download/untagged-a71b8cefc69f74260e94/Jetpack-main.zip" onclick="add('jetpack')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/Jetpack">GitHub</a>
+
+<div class="meta">
+📥 <span id="jetpack">0</span> descargas
+</div>
+</div>
+</div>
+
+<!-- COINDASH -->
+<div class="card" data-name="coindash arcade">
+<img src="imagenes/coindash.jpg">
+<div class="content">
+<span class="tag">ARCADE</span>
+<h2>CoinDash</h2>
+
+<a class="btn download" href="descargas/coindash.zip" onclick="add('coindash')">Descargar</a>
+<a class="btn github" href="https://github.com/nmartin-elpuig/Coindash_H-N">GitHub</a>
+
+<div class="meta">
+📥 <span id="coindash">0</span> descargas
 </div>
 </div>
 </div>
 
 </div>
 
-<button id="topBtn" onclick="scrollToTop()">↑</button>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<footer>Ultimate Game Hub · </footer>
 
 <script>
 
-// DATA SYSTEM
-let games=["flappy","space","jetpack","coindash"];
-
-function get(k){return Number(localStorage.getItem(k)||0)}
-function set(k,v){localStorage.setItem(k,v)}
-
-// DOWNLOAD
-function download(g){
-set(g+"_d",get(g+"_d")+1);
-update();
+// downloads
+function add(id){
+let c=localStorage.getItem(id)||0;
+c++;
+localStorage.setItem(id,c);
+document.getElementById(id).innerText=c;
 }
 
-// FAVORITE (simple toggle logic)
-document.querySelectorAll(".card").forEach(c=>{
-c.addEventListener("dblclick",()=>{
-let g=c.querySelector("h2").innerText.toLowerCase();
-set(g+"_f",get(g+"_f")+1);
-update();
-});
+// load
+["flappy","space","jetpack","coindash"].forEach(i=>{
+document.getElementById(i).innerText=localStorage.getItem(i)||0;
 });
 
-// UPDATE UI
-function update(){
-let totalD=0,totalF=0,top="",max=0;
-
-games.forEach(g=>{
-let d=get(g+"_d");
-let f=get(g+"_f");
-
-document.getElementById(g).innerText=d;
-document.getElementById(g+"F").innerText=f;
-
-totalD+=d;
-totalF+=f;
-
-if(d>max){max=d;top=g}
-});
-
-document.getElementById("totalD").innerText=totalD;
-document.getElementById("totalF").innerText=totalF;
-document.getElementById("topGame").innerText=top;
-}
-
-update();
-
-// SEARCH
+// search
 document.getElementById("search").addEventListener("input",e=>{
 let v=e.target.value.toLowerCase();
 document.querySelectorAll(".card").forEach(c=>{
@@ -306,46 +255,9 @@ c.style.display=c.dataset.name.includes(v)?"block":"none";
 });
 });
 
-// THEME
-function toggleTheme(){
-document.body.classList.toggle("light");
-}
-
-// TOP
-function scrollToTop(){
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-// SCROLL ANIMATION
-const obs=new IntersectionObserver(e=>{
-e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
-});
-document.querySelectorAll(".card").forEach(c=>obs.observe(c));
-
-// PARTICLES BACKGROUND
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let particles=[];
-for(let i=0;i<60;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:2})
-}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="rgba(56,189,248,0.5)";
-particles.forEach(p=>{
-p.y+=0.3;
-if(p.y>canvas.height)p.y=0;
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-});
-requestAnimationFrame(animate);
-}
-animate();
+// top button
+let btn=document.getElementById("topBtn");
+window.onscroll=()=>btn.style.display=scrollY>300?"block":"none";
 
 </script>
 
